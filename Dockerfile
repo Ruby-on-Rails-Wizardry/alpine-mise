@@ -20,8 +20,12 @@ ENV LANG=C.UTF-8 \
     MISE_DATA_DIR=${CACHE_ROOT}/mise \
     MISE_CONFIG_DIR=/home/${USER}/.config/mise \
     MISE_CACHE_DIR=${CACHE_ROOT}/mise-cache \
+    MISE_RUBY_COMPILE=false \
+    MISE_TRUSTED_CONFIG_PATHS=/work \
+    XDG_STATE_HOME=${CACHE_ROOT}/xdg-state \
     BUNDLE_PATH=${CACHE_ROOT}/bundle \
     BUNDLE_CACHE_PATH=${CACHE_ROOT}/rubygems \
+    BUNDLE_CLEAN=false \
     YARN_CACHE_FOLDER=${CACHE_ROOT}/yarn-cache \
     YARN_OFFLINE_MIRROR=${CACHE_ROOT}/yarn \
     YARN_GLOBAL_FOLDER=${CACHE_ROOT}/yarn-global \
@@ -35,24 +39,41 @@ ENV LANG=C.UTF-8 \
     PATH=/home/${USER}/.local/bin:${CACHE_ROOT}/mise/shims:${PATH} \
     HOME=/home/${USER}
 
-# Minimal base + common shells (bash default; ksh via mksh; sh is busybox ash).
-# shadow provides useradd/usermod for UID/GID control; sudo uses drop-in + wheel.
+# Shells + compilers/headers so mise (ruby-build/python-build), native gems,
+# and pip/npm extensions can compile when prebuilts are missing.
+# shadow: useradd/usermod; sudo drop-in + wheel. ksh → mksh (no ksh93 package).
 RUN apk add --no-cache \
+        autoconf \
         bash \
+        bison \
+        build-base \
+        bzip2-dev \
         ca-certificates \
         curl \
         fish \
+        gdbm-dev \
         git \
         less \
+        libffi-dev \
+        libxml2-dev \
+        libxslt-dev \
+        linux-headers \
         mksh \
+        ncurses-dev \
+        openssl-dev \
+        pkgconf \
+        readline-dev \
         shadow \
+        sqlite-dev \
         sudo \
         tzdata \
         unzip \
         wget \
         vim \
+        xz-dev \
+        yaml-dev \
+        zlib-dev \
         zsh \
-    # Provide `ksh` as mksh (Alpine has no ksh93 package).
     && ln -sf /bin/mksh /usr/bin/ksh
 
 # Non-root user (name / UID / GID overridable). See docker/setup-user.sh.
