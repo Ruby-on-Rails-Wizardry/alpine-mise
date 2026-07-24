@@ -19,6 +19,17 @@ Version tags are `vX.Y.Z`. A GitHub Release via `gh release create` is required 
 
 <!-- Next changes go here. Move bullets into a version section when cutting a release. -->
 
+## [0.4.1] - 2026-07-24
+
+### Changed
+
+- Force **Ruby source builds** on Alpine (`MISE_RUBY_COMPILE=true` / `ruby.compile = true`): jdx/ruby prebuilts are glibc and cannot run on musl
+
+### Fixed
+
+- Compose `app` service: set `MISE_RUBY_COMPILE=true` and remove broken Ruby installs from `/cache` before `mise install` (fixes `ruby: not found` after a glibc prebuild)
+- Pin sample_app submodule so mounted apps no longer force `ruby.compile = false`
+
 ## [0.4.0] - 2026-07-24
 
 ### Added
@@ -84,7 +95,8 @@ Version tags are `vX.Y.Z`. A GitHub Release via `gh release create` is required 
 - Phrase shortcuts (**send it** / **ship it** / **cut a release**) in AGENTS.md and README
 - Baseline host UX: Task + `bin/*`, parallel Compose path, mise, multi-shell login, `/cache` layout
 
-[Unreleased]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.1.0...v0.2.0

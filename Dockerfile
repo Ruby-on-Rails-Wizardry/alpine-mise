@@ -20,7 +20,9 @@ ENV LANG=C.UTF-8 \
     MISE_DATA_DIR=${CACHE_ROOT}/mise \
     MISE_CONFIG_DIR=/home/${USER}/.config/mise \
     MISE_CACHE_DIR=${CACHE_ROOT}/mise-cache \
-    MISE_RUBY_COMPILE=false \
+    # Alpine is musl: jdx/ruby prebuilts are glibc-linked and will not run here.
+    # Always compile Ruby via ruby-build (toolchain is in the image).
+    MISE_RUBY_COMPILE=true \
     MISE_TRUSTED_CONFIG_PATHS=/work \
     XDG_STATE_HOME=${CACHE_ROOT}/xdg-state \
     BUNDLE_PATH=${CACHE_ROOT}/bundle \

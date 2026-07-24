@@ -44,7 +44,7 @@ Two **parallel** runtimes — same `/work` + `/cache` contract:
 | Create `/cache`, profile.d | `docker/setup-cache.sh` |
 | User creation | `docker/setup-user.sh` |
 | Shell mise activation | `docker/setup-mise-shell.sh` |
-| Default language tool versions | `mise.toml` (node/yarn/python/task); **Ruby SSOT = Gemfile** `ruby "4.0.6"` |
+| Default language tool versions | `mise.toml` (node/yarn/python/task); **Ruby SSOT = Gemfile** `ruby "4.0.6"`; **ruby.compile=true** (musl) |
 | Sample project (warm/smoke) | `Gemfile*` (includes `ruby "…"`), `package.json`/`yarn.lock`, `requirements.txt`, `scripts/smoke.sh` |
 | Realistic Rails sample | `sample_app/` git submodule → compose service `app` (`bin/compose-app`) |
 | Host run helpers | `bin/lib.sh` |

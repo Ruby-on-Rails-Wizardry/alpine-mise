@@ -77,7 +77,7 @@ When this directory is the project (`task setup` / `task shell` here), [mise.tom
 
 `task warm` runs `mise install` into `/cache/mise`. **App repos should use `Gemfile` + `mise.toml`** when you set `PROJECT=…`. Omit `ruby` under `[tools]` when the Gemfile pin is parseable (e.g. `4.0.6`).
 
-Ruby installs prefer **precompiled** binaries (`ruby.compile = false` / `MISE_RUBY_COMPILE=false`) for speed. The image still ships a full compile toolchain (`build-base`, OpenSSL/YAML/zlib headers, …) so ruby-build, native gems, and Python/Node extensions can build when needed.
+Ruby installs **compile from source** on Alpine (`ruby.compile = true` / `MISE_RUBY_COMPILE=true`). Precompiled jdx/ruby builds are **glibc** and will not run on musl. The image ships `build-base` plus OpenSSL/YAML/zlib headers for ruby-build and native gems.
 
 Starter sample files (same in all flavors; for warm + [scripts/smoke.sh](scripts/smoke.sh)):
 

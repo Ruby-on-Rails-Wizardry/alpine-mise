@@ -61,6 +61,8 @@ services:
       CACHE_ROOT: ${CACHE_ROOT:-/cache}
       PORT: ${SAMPLE_APP_PORT:-3000}
       RAILS_ENV: development
+      # musl: force ruby-build even if a mounted app mise.toml sets compile=false
+      MISE_RUBY_COMPILE: "true"
     volumes:
       - type: bind
         source: ${SAMPLE_APP_MOUNT:-./sample_app}
@@ -79,11 +81,20 @@ services:
       - -lc
       - |
         set -euo pipefail
+        export MISE_RUBY_COMPILE=true
         eval "$(mise activate bash)"
         if command -v cache-env >/dev/null 2>&1; then
           cache-env --ensure || true
         fi
         mise trust . 2>/dev/null || true
+        # Drop unusable Ruby installs (e.g. glibc prebuilds left in a shared volume).
+        for _ruby in /cache/mise/installs/ruby/*/bin/ruby; do
+          [[ -e "$${_ruby}" ]] || continue
+          if ! "$${_ruby}" -v >/dev/null 2>&1; then
+            echo "removing broken ruby install: $$(dirname "$$(dirname "$${_ruby}")")"
+            rm -rf "$$(dirname "$$(dirname "$${_ruby}")")"
+          fi
+        done
         if [[ -f mise.toml ]] || [[ -f Gemfile ]]; then
           mise install
         fi

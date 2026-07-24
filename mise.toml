@@ -14,10 +14,9 @@
 min_version = "2025.8.0"
 
 [settings]
-# Prefer precompiled Ruby (jdx/ruby) for speed. Images also ship compile
-# toolchains so ruby-build / native gems still work when needed
-# (ruby.compile = true or missing prebuild).
-ruby.compile = false
+# Alpine is musl — do not use jdx/ruby precompiled binaries (glibc). Compile
+# with ruby-build; the image includes build-base + headers for that.
+ruby.compile = true
 idiomatic_version_file_enable_tools = ["ruby"]
 
 [tools]
