@@ -2,7 +2,7 @@
 
 ## Purpose
 
-**alpine-mise** is a reusable **base development image**: Ubuntu 24.04 + non-root user + mise + multi-shell activation + shared `/cache` for package managers.
+**alpine-mise** is a reusable **base development image**: Alpine 3.22 + non-root user + mise + multi-shell activation + shared `/cache` for package managers.
 
 It is **not** the multi-app Rails cluster (`../wf/`). No project `wf` mount is baked in.
 
@@ -12,9 +12,9 @@ It is **not** the multi-app Rails cluster (`../wf/`). No project `wf` mount is b
 |-------|--------|
 | Base OS | Alpine 3.22 |
 | User | `dev` (override `USER` / `IMAGE_USER`), UID/GID via build args |
-| Tool manager | mise (`MISE_DATA_DIR=/cache/mise`); Ruby prefers precompiled; compile toolchain in image |
-| Build toolchain | `build-base` + OpenSSL/YAML/zlib/ffi/… headers for native gems & language builds |
-| Shells | bash, ksh, sh (dash), zsh, fish activate mise on login |
+| Tool manager | mise (`MISE_DATA_DIR=/cache/mise`); **Ruby always compiles** (`MISE_RUBY_COMPILE=true` — musl cannot use glibc jdx/ruby prebuilts) |
+| Build toolchain | `build-base` + OpenSSL/YAML/zlib/ffi/… headers for ruby-build, native gems & language builds |
+| Shells | bash, ksh (mksh), sh (ash), zsh, fish activate mise on login |
 | Project mount | Host `PROJECT` or `$PWD` → **`/work`** |
 | Package cache | Named volume → **`/cache`** |
 | Host UX | **Task** (`Taskfile.yml`) + **`bin/*`** (logic lives in bin) |

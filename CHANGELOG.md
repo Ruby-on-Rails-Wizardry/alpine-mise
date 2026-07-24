@@ -13,6 +13,8 @@ Version tags are `vX.Y.Z`. A GitHub Release via `gh release create` is required 
 
 ### Changed
 
+- AGENTS.md: correct Purpose/locked decisions for Alpine (not Ubuntu), musl Ruby compile, ash/mksh shells
+
 ### Fixed
 
 ### Security
