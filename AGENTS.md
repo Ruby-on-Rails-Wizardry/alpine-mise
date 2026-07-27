@@ -13,6 +13,7 @@ It is **not** the multi-app Rails cluster (`../wf/`). No project `wf` mount is b
 | Base OS | Alpine 3.22 |
 | User | `dev` (override `USER` / `IMAGE_USER`), UID/GID via build args |
 | Tool manager | mise (`MISE_DATA_DIR=/cache/mise`); **Ruby always compiles** (`MISE_RUBY_COMPILE=true` — musl cannot use glibc jdx/ruby prebuilts) |
+| Mise install timing | **Development (this image):** `mise install` at **runtime** into **`/cache`**. **Production default:** no mise. **If prod uses mise:** builder stage only; no install/activate on boot. |
 | Build toolchain | `build-base` + OpenSSL/YAML/zlib/ffi/… headers for ruby-build, native gems & language builds |
 | Shells | bash, ksh (mksh), sh (ash), zsh, fish activate mise on login |
 | Project mount | Host `PROJECT` or `$PWD` → **`/work`** |
