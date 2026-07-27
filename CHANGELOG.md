@@ -13,13 +13,17 @@ Version tags are `vX.Y.Z`. A GitHub Release via `gh release create` is required 
 
 ### Changed
 
-- AGENTS.md: correct Purpose/locked decisions for Alpine (not Ubuntu), musl Ruby compile, ash/mksh shells
-
 ### Fixed
 
 ### Security
 
 <!-- Next changes go here. Move bullets into a version section when cutting a release. -->
+
+## [0.4.2] - 2026-07-27
+
+### Changed
+
+- AGENTS.md: correct Purpose/locked decisions for Alpine (not Ubuntu), musl Ruby compile, ash/mksh shells
 
 ## [0.4.1] - 2026-07-24
 
@@ -97,7 +101,8 @@ Version tags are `vX.Y.Z`. A GitHub Release via `gh release create` is required 
 - Phrase shortcuts (**send it** / **ship it** / **cut a release**) in AGENTS.md and README
 - Baseline host UX: Task + `bin/*`, parallel Compose path, mise, multi-shell login, `/cache` layout
 
-[Unreleased]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/releases/tag/v0.4.2
 [0.4.1]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Ruby-on-Rails-Wizardry/alpine-mise/compare/v0.2.0...v0.3.0
