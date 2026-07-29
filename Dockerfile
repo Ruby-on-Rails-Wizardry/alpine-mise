@@ -11,8 +11,8 @@ ARG DEV_UID=1000
 ARG DEV_GID=1000
 ARG MISE_VERSION=v2026.7.7
 ARG CACHE_ROOT=/cache
-# Optional major version (e.g. 15, 16, 17). Empty = skip client/libpq install.
-ARG POSTGRESQL_VERSION=
+# Optional major version (e.g. 15–18). Default 18 = current stable client.
+ARG POSTGRESQL_VERSION=18
 
 # Image/user layout + shared package/tool caches under CACHE_ROOT.
 ENV LANG=C.UTF-8 \
