@@ -273,11 +273,11 @@ task shell
 docker build -t alpine-mise:dev \
   --build-arg DEV_UID=$(id -u) --build-arg DEV_GID=$(id -g) .
 
-docker volume create alpine-mise-cache
+docker volume create cache
 
 docker run --rm -it \
   -v "$PWD":/work -w /work \
-  -v alpine-mise-cache:/cache \
+  -v cache:/cache \
   alpine-mise:dev
 ```
 
