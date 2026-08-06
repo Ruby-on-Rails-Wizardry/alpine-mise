@@ -3,8 +3,10 @@
 #   (Bundler, Yarn 1 + Berry, npm, pip/uv/poetry, mise).
 # Login shells (bash, ksh/mksh, sh/ash, zsh, fish) activate mise via shell rc files.
 
-FROM alpine:3.22
-
+# BASE_IMAGE — Dockerfile FROM (public default alpine:3.22).
+# Override: BASE_IMAGE=… bin/build  or  base-image.env  (see docs/PRIVATE-BASE.md)
+ARG BASE_IMAGE=alpine:3.22
+FROM ${BASE_IMAGE}
 # Container login name (default "dev"). Pair with DEV_UID / DEV_GID for bind mounts.
 ARG USER=dev
 ARG DEV_UID=1000
